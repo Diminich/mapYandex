@@ -1,11 +1,19 @@
 import React from 'react';
-import styles from './App.module.scss'
+import {YMaps, Map, FullscreenControl} from 'react-yandex-maps';
+import styles from './App.module.css'
 
 function App() {
   return (
-    <div className={styles.wrapperApp}>
-
-    </div>
+    <>
+      <YMaps className={styles.wrapperApp}>
+              <Map defaultState={{
+                  center: [55.75, 37.57],
+                  zoom: 9,
+                  controls: []
+              }} />
+              <FullscreenControl />
+      </YMaps>
+    </>
   );
 }
 
