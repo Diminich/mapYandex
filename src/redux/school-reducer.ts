@@ -1538,7 +1538,7 @@ const initialState: TypeSchools = {
             "online_only": true,
             "number_of_students": null,
             "contact_name": 'Dimych',
-            "contact_number": "+375 29 186 0953",
+            "contact_number": "+375-29-186-0953",
             "contact_email": null,
             "latitude": 53.9172903,
             "longitude": 27.6053381,
