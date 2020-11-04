@@ -1,42 +1,53 @@
-import React, {useState} from "react";
+import React from "react";
 import {YMaps, Map, Placemark} from "react-yandex-maps";
 import styles from "../../App.module.css";
-import {useSelector} from "react-redux";
-import {TypeSchoolParameters} from "../../Types/Types";
+import {useDispatch, useSelector} from "react-redux";
+import {CoordsType, MapSchoolProps, TypeSchoolParameters} from "../../Types/Types";
 import {AppStateType} from "../../redux/redux-store";
+import {addStateCoords} from "../../redux/addSchools-reducer";
+import MapLabels from "./mapLabels/MapLabels";
 
-const MapSchool = () => {
-    const [coords, setCoords] = useState([])
-    const getSchools = useSelector<AppStateType, Array<TypeSchoolParameters>>((state => state.schoolPage.schools))
-    const myState = {center: [53.8957933, 27.5735831], zoom: 12}
+const MapSchool = ({myState}: {myState: MapSchoolProps}) => {
+    const getSchools = useSelector<AppStateType, Array<TypeSchoolParameters>>((state => state.schoolPage.schools));
+    const getCoords = useSelector<AppStateType, Array<CoordsType>>((state => state.addSchoolPage.coords));
+    const dispatch = useDispatch();
 
     const addCoords = (e: any) => {
-        setCoords(e.get('coords'))
+        dispatch(addStateCoords( e.get('coords')))
     }
 
     return (
-        <YMaps className={styles.wrapperMap}>
-            <Map width={'100%'} height={'100vh'} state={myState} onClick={addCoords}>
-                {getSchools.map(s => {
-                    return (
-                        <Placemark geometry={[s.latitude, s.longitude]}
-                                   modules={['geoObject.addon.balloon']}
-                                   properties={{
-                                       balloonContentHeader: s.name,
-                                       balloonContentBody: `format description: ${s.format_description}`,
-                                   }}
-                        />
-                    )
-                })}
-                <Placemark geometry={coords}
-                           modules={['geoObject.addon.balloon']}
-                           properties={{
-                               balloonContentHeader: '',
-                               balloonContentBody: ''
-                           }}
-                />
-            </Map>
-        </YMaps>
+        <>
+            <MapLabels getCoords={getCoords} />
+            <YMaps className={styles.wrapperMap}>
+                <Map width={'100%'} height={'100vh'} state={myState} onClick={addCoords}>
+                    {getSchools.map(schools => {
+                        return (
+                            <Placemark geometry={[schools.latitude, schools.longitude]}
+                                       modules={['geoObject.addon.balloon']}
+                                       properties={{
+                                           balloonContentHeader: schools.name,
+                                           balloonContentBody: `format description: ${schools.format_description}`,
+                                       }}
+                            />
+                        )
+                    })}
+                    {getCoords.map((lab: any) => {
+                        return (
+                            <Placemark geometry={lab.coords}
+                                       preset={['islands#redIcon']}
+                                       modules={['geoObject.addon.balloon']}
+                                       properties={{
+                                           balloonContentHeader: 'dasdasdsad',
+                                           balloonContentBody: '',
+                                       }}
+                                       options={{preset: 'islands#redIcon'}}
+                            />
+                        )
+                    })}
+                </Map>
+            </YMaps>
+        </>
     )
 }
 

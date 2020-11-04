@@ -2,10 +2,13 @@ import React from 'react';
 import styles from './App.module.css'
 import MapSchool from './components/map/mapSchool';
 
-function App() {
+
+
+const App = () => {
+    const myState = {center: [53.8957933, 27.5735831], zoom: 12}
     return (
         <div className={styles.wrapperApp}>
-            <MapSchool/>
+            <MapSchool myState={myState}/>
         </div>
     )
 }

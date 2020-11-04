@@ -28,3 +28,21 @@ export type TypeSchoolParameters = {
     "country": string,
     "source": string
 }
+
+export type MapSchoolProps = {
+    center: Array<number>,
+    zoom: number
+}
+
+export type getCoordsProps = {
+    coords: Array<number>
+}
+
+export type CoordsType = {
+    id: symbol,
+    coords: Array<number>
+}
+
+export type InitialStateType = {
+    coords: Array<CoordsType>
+}
