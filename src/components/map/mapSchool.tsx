@@ -16,6 +16,7 @@ const MapSchool = ({myState}: {myState: MapSchoolProps}) => {
         dispatch(addStateCoords( e.get('coords')))
     }
 
+
     return (
         <>
             <MapLabels getCoords={getCoords} />
@@ -32,13 +33,14 @@ const MapSchool = ({myState}: {myState: MapSchoolProps}) => {
                             />
                         )
                     })}
-                    {getCoords.map((lab: any) => {
+                    {getCoords.map((lab) => {
                         return (
                             <Placemark geometry={lab.coords}
                                        preset={['islands#redIcon']}
                                        modules={['geoObject.addon.balloon']}
                                        properties={{
-                                           balloonContentHeader: 'dasdasdsad',
+                                           hintContent: 'dsadsadasdas',
+                                           balloonContentHeader: lab.schoolName,
                                            balloonContentBody: '',
                                        }}
                                        options={{preset: 'islands#redIcon'}}

@@ -40,7 +40,8 @@ export type getCoordsProps = {
 
 export type CoordsType = {
     id: symbol,
-    coords: Array<number>
+    coords: Array<number>,
+    schoolName: string
 }
 
 export type InitialStateType = {
