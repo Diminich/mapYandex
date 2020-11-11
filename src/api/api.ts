@@ -1,6 +1,19 @@
 import axios from 'axios';
 
 export const instance = axios.create({
-    baseURL: 'https://api-maps.yandex.ru/2.1/?apikey=89421737-9451-4936-8983-4e920b355b6c&lang=ru_RU'
+    baseURL: 'http://personal-area-it-incubator.herokuapp.com/1.0/map-items'
 });
 
+export const schoolsApi = {
+    getSchools() {
+       return  instance.get('')
+    },
+
+    postSchools(mapItem: any) {
+        return instance.post('',{mapItem})
+    },
+
+    deleteSchool(id: string) {
+        return instance.delete(`${id}`)
+    }
+}

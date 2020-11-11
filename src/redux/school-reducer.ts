@@ -1,6 +1,4 @@
-import {TypeSchools} from "../Types/Types";
-
-const initialState: TypeSchools = {
+const initialState: any = {
     schools: [
         {
             "name": "J.K. Mullen High School",
